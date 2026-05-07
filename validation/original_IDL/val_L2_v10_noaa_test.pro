@@ -73,13 +73,13 @@ pro val_L2_v10_noaa
 
     nvalfiles = n_elements(valfiles)
 
-      print, nvalfiles
+    ;  print, nvalfiles
 
     if (nvalfiles lt 1) then continue
 
-    ;for ivalfile = 0, nvalfiles-1 do begin
-    ; testing
-    for ivalfile = 0, 10 do begin
+    for ivalfile = 0, nvalfiles-1 do begin
+    ; ********* testing
+    ;for ivalfile = 0, 10 do begin
 
           print, valfiles(ivalfile)
 
@@ -410,13 +410,13 @@ pro val_L2_v10_noaa
 
           dist = distance(moplat(ibox(j)), moplon(ibox(j)), proflat, proflon)
 
-          print, 'dist = ', dist, ', distmax = ', distmax
+          ;print, 'dist = ', dist, ', distmax = ', distmax
 
           ; calculate time offset in hrs
 
           dthrs = secs(ibox(j))/3600. - (float(profhr) + float(profmn)/60.)
 
-          print, 'dthrs = ', abs(dthrs), ', dthrsmax = ', dthrsmax
+          ; print, 'dthrs = ', abs(dthrs), ', dthrsmax = ', dthrsmax
 
           if (dist gt distmax or abs(dthrs) gt dthrsmax) then continue
 
