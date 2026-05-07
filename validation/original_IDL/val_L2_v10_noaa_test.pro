@@ -73,13 +73,15 @@ pro val_L2_v10_noaa
 
     nvalfiles = n_elements(valfiles)
 
-    ;  print, nvalfiles
+      print, nvalfiles
 
     if (nvalfiles lt 1) then continue
 
-    for ivalfile = 0, nvalfiles-1 do begin
+    ;for ivalfile = 0, nvalfiles-1 do begin
+    ; testing
+    for ivalfile = 0, 10 do begin
 
-      ;    print, valfiles(ivalfile)
+          print, valfiles(ivalfile)
 
       ; get date and time from file name
 
@@ -120,6 +122,7 @@ pro val_L2_v10_noaa
       endif
 
       ; only continue if p_min (top of profile) is less than p_thr
+      print, 'nflask = ', nflask, ', nflaskmin = ', nflaskmin
 
       ;    if (p_min gt p_thr) then continue
       ;    if (p_obs_top gt p_top_thr or p_obs_bot lt p_bot_thr) then continue
@@ -131,7 +134,10 @@ pro val_L2_v10_noaa
 
       ;;;;;; new code added March, 2018 for calcg moist-air mole fraction ;;;;;;
 
-      spawn, 'ls /MOPITT/project/datasets/merra2-nc4/' + profyr + profmo + '/' + 'svc_MERRA2_???.inst6_3d_ana_Np.' + profyr + profmo + profdy + '.nc4', allfiles
+      ;spawn, 'ls /MOPITT/project/datasets/merra2-nc4/' + profyr + profmo + '/' + 'svc_MERRA2_???.inst6_3d_ana_Np.' + profyr + profmo + profdy + '.nc4', allfiles
+
+      spawn, 'ls /MOPITT/project/datasets/merra2-nc4/Rebecca/3D/'+ 'svc_MERRA2_???.inst6_3d_ana_Np.' + profyr + profmo + profdy + '.nc4', allfiles
+
 
       ncfile = allfiles(0)
       if (file_test(ncfile) ne 1) then begin
@@ -404,9 +410,13 @@ pro val_L2_v10_noaa
 
           dist = distance(moplat(ibox(j)), moplon(ibox(j)), proflat, proflon)
 
+          print, 'dist = ', dist, ', distmax = ', distmax
+
           ; calculate time offset in hrs
 
           dthrs = secs(ibox(j))/3600. - (float(profhr) + float(profmn)/60.)
+
+          print, 'dthrs = ', abs(dthrs), ', dthrsmax = ', dthrsmax
 
           if (dist gt distmax or abs(dthrs) gt dthrsmax) then continue
 
