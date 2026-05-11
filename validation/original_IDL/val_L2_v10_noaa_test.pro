@@ -122,9 +122,12 @@ pro val_L2_v10_noaa
       endif
 
       ; only continue if p_min (top of profile) is less than p_thr
-      print, 'nflask = ', nflask, ', nflaskmin = ', nflaskmin
+      ;print, 'nflask = ', nflask, ', nflaskmin = ', nflaskmin
 
       ;    if (p_min gt p_thr) then continue
+      ;if (p_obs_top gt p_top_thr or p_obs_bot lt p_bot_thr) then begin
+      ;print, 'p_obs_top = ', p_obs_top, ', p_obs_bot = ', p_obs_bot
+      ;endif
       ;    if (p_obs_top gt p_top_thr or p_obs_bot lt p_bot_thr) then continue
       if (p_obs_top gt p_top_thr or p_obs_bot lt p_bot_thr or nflask lt nflaskmin) then continue
 
@@ -267,6 +270,9 @@ pro val_L2_v10_noaa
         ibox = where(abs(moplat - proflat) lt dlatmax and abs(moplon - proflon) lt dlonmax, nbox)
 
         print, 'nbox = ', nbox
+        ;if (nbox lt 1) then begin
+        ;   print, 'nbox = ', nbox
+        ;endif
 
         if (nbox lt 1) then continue
 
@@ -411,12 +417,30 @@ pro val_L2_v10_noaa
           dist = distance(moplat(ibox(j)), moplon(ibox(j)), proflat, proflon)
 
           ;print, 'dist = ', dist, ', distmax = ', distmax
+          ;if (dist le distmax) then begin
+          ;  print, 'Inside radius threshold'
+          ;endif
 
           ; calculate time offset in hrs
 
           dthrs = secs(ibox(j))/3600. - (float(profhr) + float(profmn)/60.)
 
           ; print, 'dthrs = ', abs(dthrs), ', dthrsmax = ', dthrsmax
+
+          ;print, 'dist = ', dist, ', distmax = ', distmax
+
+         if (abs(dthrs) le dthrsmax) then begin
+           if (dist le distmax) then begin
+            print, 'Inside radius threshold'
+            endif
+          endif
+
+          ;if (dist le distmax) then begin
+          ;  print, 'Inside radius threshold'
+            ;if (abs(dthrs) gt dthrsmax) then begin
+            ;  print, 'Outside time threshold'
+            ;endif
+          ;endif
 
           if (dist gt distmax or abs(dthrs) gt dthrsmax) then continue
 
