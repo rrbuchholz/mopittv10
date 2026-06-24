@@ -7,7 +7,7 @@ To cite this codebase, please use:
 Latest version: TBD
 
 Aircraft profiles are from NOAA, HIPPO and ATom, harmonized, altered and extended from raw experimental profiles.
-> **Data DOI**: Martínez-Alonso, S., Deeter, M. N., Worden, H. M., Mao, D., Ziskin, D., Buchholz, R. R., Emmons, L., & Jeffery, P. (2026). Aircraft carbon monoxide profiles for MOPITT V10 validation [Data set]. Zenodo. https://doi.org/10.5281/zenodo.20147785 
+> **Data DOI**: Martínez-Alonso, S., Deeter, M. N., Emmons, L., Tang, W., Mao, D., Ziskin, D., Buchholz, R. R., Jeffery, P., & Worden, H. M. (2026). Aircraft-measured carbon monoxide profiles for MOPITT V10 validation [Data set]. Zenodo. https://doi.org/10.5281/zenodo.20147785
 
 ## Methodology
 
